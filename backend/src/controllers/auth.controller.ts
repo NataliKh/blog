@@ -1,10 +1,11 @@
-import { Request, Response } from 'express';
+﻿import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { asyncHandler } from '../utils/async-handler';
 import { ApiError } from '../utils/api-error';
 import { UserModel } from '../models/user.model';
-import { RoleModel, RoleDocument } from '../models/role.model';
+import { RoleModel } from '../models/role.model';
 import { signAccessToken } from '../utils/jwt';
+import { isRoleDocument } from '../utils/type-guards';
 
 export const register = asyncHandler(async (req: Request, res: Response) => {
   const errors = validationResult(req);
@@ -76,7 +77,7 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     throw new ApiError(401, 'Invalid credentials');
   }
 
-  const roleDoc = user.role as RoleDocument | null;
+  const roleDoc = isRoleDocument(user.role) ? user.role : null;
 
   if (!roleDoc) {
     throw new ApiError(403, 'Role is missing');
@@ -111,7 +112,7 @@ export const getProfile = asyncHandler(async (req: Request, res: Response) => {
     throw new ApiError(404, 'User not found');
   }
 
-  const roleDoc = user.role as RoleDocument | null;
+  const roleDoc = isRoleDocument(user.role) ? user.role : null;
 
   res.json({
     id: user.id,

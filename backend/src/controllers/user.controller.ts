@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+﻿import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { asyncHandler } from '../utils/async-handler';
 import { ApiError } from '../utils/api-error';
 import { UserModel } from '../models/user.model';
-import { RoleModel, RoleDocument } from '../models/role.model';
+import { RoleModel } from '../models/role.model';
+import { isRoleDocument } from '../utils/type-guards';
 
 export const getUsers = asyncHandler(async (req: Request, res: Response) => {
   const page = Number(req.query.page ?? 1);
@@ -18,14 +19,18 @@ export const getUsers = asyncHandler(async (req: Request, res: Response) => {
     .exec();
 
   res.json({
-    data: users.map((user) => ({
-      id: String(user._id),
-      name: user.name,
-      email: user.email,
-      role: (user.role as RoleDocument | undefined)?.name ?? 'unknown',
-      bio: user.bio ?? null,
-      avatarUrl: user.avatarUrl ?? null
-    }))
+    data: users.map((user) => {
+      const roleDoc = isRoleDocument(user.role) ? user.role : null;
+
+      return {
+        id: String(user._id),
+        name: user.name,
+        email: user.email,
+        role: roleDoc?.name ?? 'unknown',
+        bio: user.bio ?? null,
+        avatarUrl: user.avatarUrl ?? null
+      };
+    })
   });
 });
 
@@ -46,11 +51,13 @@ export const getUser = asyncHandler(async (req: Request, res: Response) => {
     throw new ApiError(404, 'User not found');
   }
 
+  const roleDoc = isRoleDocument(user.role) ? user.role : null;
+
   res.json({
     id: String(user._id),
     name: user.name,
     email: user.email,
-    role: (user.role as RoleDocument | undefined)?.name ?? 'unknown',
+    role: roleDoc?.name ?? 'unknown',
     bio: user.bio ?? null,
     avatarUrl: user.avatarUrl ?? null
   });
@@ -112,11 +119,13 @@ export const updateUser = asyncHandler(async (req: Request, res: Response) => {
     throw new ApiError(404, 'User not found');
   }
 
+  const roleDoc = isRoleDocument(updated.role) ? updated.role : null;
+
   res.json({
     id: String(updated._id),
     name: updated.name,
     email: updated.email,
-    role: (updated.role as RoleDocument | undefined)?.name ?? 'unknown',
+    role: roleDoc?.name ?? 'unknown',
     bio: updated.bio ?? null,
     avatarUrl: updated.avatarUrl ?? null
   });

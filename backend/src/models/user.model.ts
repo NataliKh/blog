@@ -1,13 +1,16 @@
-import { Schema, model, Document, Types } from 'mongoose';
+﻿import { Schema, model, Document, Types } from 'mongoose';
 import bcrypt from 'bcryptjs';
+import { RoleDocument } from './role.model';
 
 export interface UserDocument extends Document {
   name: string;
   email: string;
   password: string;
-  role: Types.ObjectId;
+  role: Types.ObjectId | RoleDocument;
   bio?: string;
   avatarUrl?: string;
+  createdAt: Date;
+  updatedAt: Date;
   comparePassword(candidate: string): Promise<boolean>;
 }
 

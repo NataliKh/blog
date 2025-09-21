@@ -1,4 +1,4 @@
-import { Schema, model, Document, Types } from 'mongoose';
+﻿import { Schema, model, Document, Types } from 'mongoose';
 
 export type CommentStatus = 'pending' | 'approved' | 'rejected';
 
@@ -7,6 +7,8 @@ export interface CommentDocument extends Document {
   author: Types.ObjectId;
   content: string;
   status: CommentStatus;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const commentSchema = new Schema<CommentDocument>(

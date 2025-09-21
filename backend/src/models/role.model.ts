@@ -1,8 +1,10 @@
-import { Schema, model, Document } from 'mongoose';
+﻿import { Schema, model, Document } from 'mongoose';
 
 export interface RoleDocument extends Document {
   name: string;
   permissions: string[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const roleSchema = new Schema<RoleDocument>(

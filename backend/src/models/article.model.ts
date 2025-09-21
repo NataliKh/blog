@@ -1,4 +1,4 @@
-import { Schema, model, Document, Types } from 'mongoose';
+﻿import { Schema, model, Document, Types } from 'mongoose';
 import { generateSlug } from '../utils/slug';
 
 export type ArticleStatus = 'draft' | 'published' | 'archived';
@@ -13,6 +13,8 @@ export interface ArticleDocument extends Document {
   status: ArticleStatus;
   publishedAt?: Date;
   commentsCount: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const articleSchema = new Schema<ArticleDocument>(
