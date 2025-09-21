@@ -1,0 +1,163 @@
+:root {
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+  background-color: #f5f5f5;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav a {
+  margin-right: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav a.active {
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.page h1 {
+  margin-top: 0;
+}
+
+.article-list {
+  display: grid;
+  gap: 16px;
+}
+
+.article-card {
+  padding: 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.article-card h3 {
+  margin: 0 0 8px;
+}
+
+.meta {
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn--primary {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: #2563eb;
+}
+
+.input, .textarea, select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+.auth-form, .editor-form, .comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.success {
+  color: #16a34a;
+  font-size: 14px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #e5e5e5;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.comment-section {
+  margin-top: 32px;
+}
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+}
+
+.comment-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.comment-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  color: #666;
+}
