@@ -1,8 +1,8 @@
-{
+﻿{
   "compilerOptions": {
     "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "Node16",
+    "moduleResolution": "node16",
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
     "types": ["node"]
